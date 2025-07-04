@@ -9,6 +9,12 @@ draft: false
 
 {{< memory-verse >}}
 
+{{< todays-wsc >}}
+
+{{< todays-staff >}}
+
+<!-- {{< mission-link >}} -->
+
 {{< todays-country >}}
 
 {{< prayer-timer >}}
@@ -16,6 +22,8 @@ draft: false
 {{< category-menu >}}  
 
 {{< prayer-requests >}}
+
+{{< todosmaillink >}}
 
 {{< todays-vov >}}
 

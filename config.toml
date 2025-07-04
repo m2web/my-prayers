@@ -1,6 +1,6 @@
-baseURL = 'https://todaysprayer.github.io'
+baseURL = 'https://todaysprivateprayer.github.io'
 languageCode = 'en-us'
-title = "Today's Prayer Site"
+title = "Today's Private Prayer Site"
 theme = "hugo-theme-jane"
 
 [[menu.main]]
