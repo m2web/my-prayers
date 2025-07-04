@@ -1,0 +1,10 @@
+{:zap:|:fire:|:pencil2:|:bug:|:sparkles:|:art:} Commit Title
+
+Short summary of the change (imperative mood)
+
+Details (if needed):
+
+- What/why/how
+- Any references or issues
+
+# Remove unused sections before committing.
