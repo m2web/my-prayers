@@ -1,0 +1,9 @@
+<!-- Get the prayer categories from the data folder and display dropdown menu-->
+<br>
+<select onchange="showSelectedPrayer(this.value)" id="PrayerListId" name="PrayerListId">
+    &nbsp; &nbsp; <option>Select Prayer Category</option>
+    {{range $.Site.Data.prayerrequests }}
+        <option value="{{.request}}">{{.category}}</option>
+    {{end}}
+</select>
+<div id="selectedPrayer" class="selectedPrayer">Select a Prayer Category</div>

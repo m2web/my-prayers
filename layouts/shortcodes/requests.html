@@ -1,0 +1,23 @@
+
+{{/* requests shortcode: display prayer requests based on day-of-week, with random offset for Thursday‑Saturday */}}
+{{/* Build the list of request filenames (without extension) from data/requests */}}
+{{ $currentDataFiles := slice }}
+{{ range os.ReadDir "data/requests" }}
+  {{ $currentDataFiles = $currentDataFiles | append (index (split .Name ".") 0) }}
+{{ end }}
+
+{{ $dataFilesNumber := int (len $currentDataFiles) }}
+{{ $diffcount := int (index (seq $dataFilesNumber | shuffle) 0) }}
+{{ $aftervalue := sub $dataFilesNumber $diffcount }}
+{{ $weekday := now.Weekday.String }}
+{{ $offsetMap := dict "Sunday" 0 "Monday" 4 "Tuesday" 8 "Wednesday" 12 }}
+{{ $start := cond (in $offsetMap $weekday) (index $offsetMap $weekday) $aftervalue }}
+
+<div class="todaysRequests">
+  <h3>Today's Request</h3>
+  {{ range first 4 (after $start $currentDataFiles) }}
+    <strong>{{ (index $.Site.Data.requests .).category | safeHTML }}</strong>:<br>
+    {{ (index $.Site.Data.requests .).content | safeHTML }}
+    <br><br>
+  {{ end }}
+</div>

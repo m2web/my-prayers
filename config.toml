@@ -1,0 +1,30 @@
+baseURL = 'https://todaysprayer.github.io'
+languageCode = 'en-us'
+title = "Today's Prayer Site"
+theme = "hugo-theme-jane"
+
+[[menu.main]]
+  name = "Today's Scripture Reading"
+  weight = 10
+  identifier = "scripture"
+  url = "https://todaysreading.github.io/"
+
+[[menu.main]]
+  name = "Contact Mark"
+  weight = 20
+  identifier = "contact"
+  url = "mailto:m2web@yahoo.com?subject=Contact%20from%20Today's%20Prayer%20Site"
+
+[[menu.main]]
+  name = "Make a Suggestion"
+  weight = 30
+  identifier = "site suggestions"
+  url = "mailto:m2web@yahoo.com?subject=Today's%20Prayer%20Site%20Suggestions"
+
+[Params]
+  customCSS = ['m2css.css']
+
+[markup]
+[markup.goldmark]
+  [markup.goldmark.renderer]
+    unsafe = true

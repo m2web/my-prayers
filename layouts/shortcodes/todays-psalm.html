@@ -1,0 +1,36 @@
+<!-- set month day -->
+{{ $.Scratch.Set "monthDayNumber" now.Day }}
+
+{{ if gt ($.Scratch.Get "monthDayNumber") 30 }}
+    {{ $randomDay :=  index (seq 31 | shuffle | first 1) }}
+    {{ $.Scratch.Set "monthDayNumber" (index $randomDay 0) }}
+{{ end }}
+
+<!-- get the last chapter in today's range -->
+{{ $daysLastChapterNumber := mul ($.Scratch.Get "monthDayNumber") 5 }}
+
+<!-- get the first chapter minus 1 as the chapter number range starts after that number -->
+{{ $daysFirstChapterNumberMinus1 := sub $daysLastChapterNumber 5 }}
+
+<!-- get the random Psalm chapter number -->
+<!-- set empty array -->
+{{ $.Scratch.Set "psalmNumber" "" }}
+<!-- build array of possible chapter numbers-->
+{{ range after $daysFirstChapterNumberMinus1 (seq $daysLastChapterNumber) }}
+    {{ if eq "" ($.Scratch.Get "psalmNumber") }} <!-- first loop-->
+        {{ $.Scratch.Set "psalmNumber" (slice .) }}
+    {{ else }}<!-- n + 1 loop-->
+        {{ $.Scratch.Add "psalmNumber" (slice .) }}
+    {{ end }}
+{{ end }}
+<!-- get the random chapter number -->
+{{ $todaysPsalm := printf "Psalm %s" (string (index (shuffle ($.Scratch.Get "psalmNumber")) 0)) }}
+{{ $headers := dict "Authorization" "Token 7af9f7d67d6bdb93a2b76c23bccecec4ffc43176" }}
+{{ $verse := replace $todaysPsalm " " "+" }} <!-- replace a space with a plus -->
+
+{{ $passageJSON := getJSON "https://api.esv.org/v3/passage/text/?include-short-copyright=false&include-headings=false&include-footnotes=false&include-passage-references=false&q=" $verse $headers }}
+
+<div class="bg-TodaysPsalm">
+    <h3>Today's Psalm</h3>
+    <strong>{{ index $passageJSON.query }}</strong>: {{ index $passageJSON.passages 0 }}
+</div>

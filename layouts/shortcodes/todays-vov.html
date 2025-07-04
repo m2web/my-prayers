@@ -1,0 +1,35 @@
+{{ $dayNumOfYear := now.YearDay }}
+
+<!-- get the count -->
+{{ $numberOfVov := 159 }}
+
+<!-- 3 full cycles of 107 questions -->
+{{ $lastCycleNumber := mul $numberOfVov 2 }}
+
+<!-- set default id = 1 -->
+{{ $.Scratch.Set "vovNum" 0 }}
+
+<!-- check if there are no WSCs -->
+{{ if gt $dayNumOfYear $lastCycleNumber }}  
+    <!-- lets get a random selection as we have gone 3 full cycles -->
+    {{ $.Scratch.Set "vovNum" (int (index (seq $numberOfVov | shuffle) 0)) }}
+{{ else }}
+    {{ if gt $dayNumOfYear $numberOfVov }} 
+        <!-- then calculate which wsc Id -->
+        {{ if modBool $dayNumOfYear $numberOfVov }}
+            {{ $.Scratch.Set "vovNum" $numberOfVov }}
+        {{ else }}
+            {{ $intDivResult := div $dayNumOfYear $numberOfVov }}
+            {{ $.Scratch.Set "vovNum" (sub $dayNumOfYear (mul $numberOfVov $intDivResult)) }}
+        {{ end }}
+    {{ else }}
+        {{ $.Scratch.Set "vovNum" $dayNumOfYear }} 
+    {{ end }}
+{{ end }}
+
+{{ $todaysVov := $.Scratch.Get "vovNum" }}
+
+<div class="bg-TodaysCatechsim">
+    <h3><a href="https://todaysreading.github.io/vov/{{ $todaysVov }}.html" target="_blank">Today's Valley of Vision Prayer</a></h3>
+</div>
+<br>

@@ -1,0 +1,11 @@
+{{ $dayNumOfYear := now.YearDay }}
+
+{{ $esvVerseJSON := $.Site.Data.esvVerses }}
+
+{{ $todaysVerse := index $esvVerseJSON (int ($dayNumOfYear))}}
+
+<div class="bg-TodaysVerse">
+    <h3>Today's Verse</h3>
+    <strong>{{ index $todaysVerse.reference }}</strong><br>
+    {{ index $todaysVerse.text 0 }}
+</div>

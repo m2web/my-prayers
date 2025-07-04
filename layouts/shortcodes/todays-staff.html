@@ -1,0 +1,53 @@
+{{ $dayNumOfYear := now.YearDay }}
+
+{{ $allStaffJSON := $.Site.Data.staff }}
+{{ $staffCount := index $allStaffJSON | len }}
+
+<!-- set default id = 1 -->
+{{ $.Scratch.Set "staffID" 1 }}
+
+<!-- check if there are no staff -->
+{{ if ne $staffCount 0 }}    
+    {{ if gt $dayNumOfYear $staffCount }} 
+        <!-- then calculate which staff Id -->
+        {{ if modBool $dayNumOfYear $staffCount }}
+            {{ $.Scratch.Set "staffID" $staffCount }}
+        {{ else }}
+            {{ $intDivResult := div $dayNumOfYear $staffCount }}
+            {{ $.Scratch.Set "staffID" (sub $dayNumOfYear (mul $staffCount $intDivResult)) }}
+        {{ end }}
+    {{ else }}
+        {{ $.Scratch.Set "staffID" $dayNumOfYear}}
+    {{ end }}
+{{ end }}
+
+<!-- use the staffID to get today's staff -->
+{{ $todaysStaffJSON := index $allStaffJSON (int (sub ($.Scratch.Get "staffID") 1))}}
+
+<!-- get the first name -->
+{{ $nameArray := split $todaysStaffJSON.name " " }}
+{{ $firstName := index $nameArray 0 }}
+
+<!-- get month's prayer note -->
+<!-- set default id = 1 -->
+{{ $.Scratch.Set "monthID" 1 }}
+{{ $monthindex := now.Month }}
+{{ $.Scratch.Set "monthID" $monthindex }}
+{{ $allNotes := $.Site.Data.prayernotes }}
+{{ $todaysPrayerNote := index $allNotes (int (sub ($.Scratch.Get "monthID") 1))}}
+
+<!-- check if todaysStaffJSON.emailAddress is not an empty string-->
+{{ if ne $todaysStaffJSON.emailAddress "" }}
+    <br>
+    <div class="bg-TodaysStaff">
+        <h3>Today's Church Staff</h3>
+        <a href="mailto:{{ $todaysStaffJSON.emailAddress }}?subject=Praying for you&body={{$firstName}}, {{ $todaysPrayerNote.text }}"><strong>{{$todaysStaffJSON.name}}</strong></a></label> - {{ $todaysStaffJSON.position }}
+    </div>
+{{ else }}
+    <br>
+    <div class="bg-TodaysStaff">
+        <h3>Today's Church Staff</h3>
+        <strong>{{$todaysStaffJSON.name}}</strong></label> - {{ $todaysStaffJSON.position }}
+    </div>
+{{ end }}
+

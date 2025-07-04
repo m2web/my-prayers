@@ -1,0 +1,14 @@
+<!-- Get the number of data files from the data folder -->
+{{ $requestCategories := int (len $.Site.Data.prayerrequests)}}
+
+<!-- Get a random count to be used to subtract from the data file array length -->
+{{ $diffcount := int (index (seq $requestCategories | shuffle) 0) }}
+
+<!-- Get the $aftervalue obtained from subtracting the $requestCategories from the $diffcount. This is used to form what data is rendered:<br> -->
+{{ $aftervalue := sub $requestCategories $diffcount }}
+
+{{ range first 4 (after $aftervalue $.Site.Data.prayerrequests) }}
+    <strong>{{ .category  | safeHTML }}</strong>:<br>
+    {{ .request | safeHTML }}
+    <br><br>
+{{ end }}

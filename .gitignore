@@ -1,0 +1,24 @@
+#
+## Hugo Generated Assets
+#
+.hugo_build.lock
+resources/
+# Hugo default output directory
+public/
+
+#
+## node_modules
+#
+node_modules/
+
+#
+## do not track package-lock.json or package.json as they cause an issue with 
+## the Azure Static build GitHub Action. The package-lock.json file is used 
+## by the Azure Static build GitHub Action to install nodejs dependencies and 
+## causing a build failure. However, apparently the package.json file is also 
+## used by the Azure Static build GitHub Action to install nodejs dependencies 
+## and causing a build failure
+#
+package-lock.json
+package.json
+

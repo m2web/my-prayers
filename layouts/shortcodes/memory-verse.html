@@ -1,0 +1,23 @@
+{{ $dayNumOfYear := now.YearDay }}
+
+{{ $memoryVerseJSON := $.Site.Data.memoryverses }}
+
+<br>
+<!-- is today's date the in the last for days of the current month? -->
+{{ if and (gt (int (strings.TrimPrefix "0" (dateFormat "02" (now.AddDate 0 0 4)))) 0) (lt (int (strings.TrimPrefix "0" (dateFormat "02" (now.AddDate 0 0 4)))) 4) }}
+    <!-- if yes, display all memory verses up to and including current month -->
+    {{ $thisMonthNumber := int (printf "%d" now.Month) }}
+    <div class="memoryVerse">
+        <h3>This Year's Memory Verses Review</h3>
+        {{ range first $thisMonthNumber (after 0 $.Site.Data.memoryverses) }}
+        <strong>{{ .reference }}</strong> - {{ .text }}<br><br>
+        {{ end }}
+    </div>
+{{ else }}
+    <!-- if no, get the current month memory verse -->
+    {{ $monthMemoryVerse := index $memoryVerseJSON (int (printf "%d" (sub now.Month  1)))}}
+    <div class="memoryVerse">
+        <h3>Today's Memory Verse</h3>
+        <strong>{{ $monthMemoryVerse.reference }}</strong> - {{ $monthMemoryVerse.text }}
+    </div>
+{{ end }}

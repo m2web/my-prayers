@@ -1,0 +1,39 @@
+{{ $dayNumOfYear := now.YearDay }}
+
+{{ $wscJSON := $.Site.Data.wsc}}
+
+<!-- get the count -->
+{{ $numberOfQuestions := 107 }}
+
+<!-- 3 full cycles of 107 questions -->
+{{ $lastCycleNumber := 321 }}
+
+<!-- set default id = 1 -->
+{{ $.Scratch.Set "wscID" 0 }}
+
+<!-- check if there are no WSCs -->
+{{ if gt $dayNumOfYear $lastCycleNumber }}  
+    <!-- lets get a random selection as we have gone 3 full cycles -->
+    {{ $.Scratch.Set "wscID" (int (index (seq $numberOfQuestions | shuffle) 0)) }}
+{{ else }}
+    {{ if gt $dayNumOfYear $numberOfQuestions }} 
+        <!-- then calculate which wsc Id -->
+        {{ if modBool $dayNumOfYear $numberOfQuestions }}
+            {{ $.Scratch.Set "wscID" (sub $numberOfQuestions 1) }} <!-- need to subtract by 1 -->
+        {{ else }}
+            {{ $intDivResult := div $dayNumOfYear $numberOfQuestions }}
+            {{ $.Scratch.Set "wscID" (sub $dayNumOfYear (mul $numberOfQuestions $intDivResult)) }}
+        {{ end }}
+    {{ else }}
+        {{ $.Scratch.Set "wscID" (sub $dayNumOfYear 1) }} <!-- need to subtract by 1 -->
+    {{ end }}
+{{ end }}
+
+{{ $todaysWSC := index $wscJSON  ($.Scratch.Get "wscID") }}
+<br>
+<div class="bg-TodaysCatechsim">
+    <h3>Today's Westminster Catechism Q/A</h3>
+    <strong>{{ $todaysWSC.number }}</strong> - {{ $todaysWSC.question }}
+    <br>
+    {{ $todaysWSC.answer }}
+</div>

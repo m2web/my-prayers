@@ -1,0 +1,33 @@
+
+{{ $dayNumOfYear := now.YearDay }}
+
+{{ $allCountriesJSON := $.Site.Data.countries }}
+{{ $countryCount := index $allCountriesJSON | len }}
+
+<!-- set default id = 1 -->
+{{ $.Scratch.Set "countryID" 1 }}
+
+<!-- check if there are no staff -->
+{{ if ne $countryCount 0 }}    
+    {{ if gt $dayNumOfYear $countryCount }} 
+        <!-- then calculate which staff Id -->
+        {{ if modBool $dayNumOfYear $countryCount }}
+            {{ $.Scratch.Set "countryID" $countryCount }}
+        {{ else }}
+            {{ $intDivResult := div $dayNumOfYear $countryCount }}
+            {{ $.Scratch.Set "countryID" (sub $dayNumOfYear (mul $countryCount $intDivResult)) }}
+        {{ end }}
+    {{ else }}
+        {{ $.Scratch.Set "countryID" $dayNumOfYear}}
+    {{ end }}
+{{ end }}
+
+<!-- use the countryID to get today's country -->
+{{ $todaysCountry := index $allCountriesJSON (int (sub ($.Scratch.Get "countryID") 1))}}
+<!-- get country link-->
+
+<br>
+<div class="bg-TodaysCountry">
+    <h3>Today's Country</h3>
+    <a href="{{ $todaysCountry.htmlLink }}" target="_blank"><strong>{{ $todaysCountry.name }}</strong></a>
+</div>
