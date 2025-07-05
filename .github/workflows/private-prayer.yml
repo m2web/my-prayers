@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master  # Set a branch to deploy
+  repository_dispatch:
+    types: [start-workflow]
   pull_request:
   schedule:
     # Run every day at 4:00 AM. Use https://crontab.guru/ to set the correct time.
