@@ -3,7 +3,6 @@ title: "Today's Prayer"
 date: 2022-01-28T07:00:37-05:00
 draft: false
 ---
-Hello netlify
 {{< the-date >}}  
 
 {{< todays-verse >}}
