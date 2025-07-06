@@ -9,17 +9,17 @@ theme = "hugo-theme-jane"
   identifier = "scripture"
   url = "https://todaysreading.github.io/"
 
-[[menu.main]]
-  name = "Contact Mark"
-  weight = 20
-  identifier = "contact"
-  url = "mailto:m2web@yahoo.com?subject=Contact%20from%20Today's%20Prayer%20Site"
+# [[menu.main]]
+#   name = "Contact Mark"
+#   weight = 20
+#   identifier = "contact"
+#   url = "mailto:m2web@yahoo.com?subject=Contact%20from%20Today's%20Prayer%20Site"
 
-[[menu.main]]
-  name = "Make a Suggestion"
-  weight = 30
-  identifier = "site suggestions"
-  url = "mailto:m2web@yahoo.com?subject=Today's%20Prayer%20Site%20Suggestions"
+# [[menu.main]]
+#   name = "Make a Suggestion"
+#   weight = 30
+#   identifier = "site suggestions"
+#   url = "mailto:m2web@yahoo.com?subject=Today's%20Prayer%20Site%20Suggestions"
 
 [Params]
   customCSS = ['m2css.css']
