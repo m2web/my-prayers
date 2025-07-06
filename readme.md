@@ -18,6 +18,7 @@ Here is what I have so far:
 
 - Set up the site on the [Netlify](https://www.netlify.com/) CMS as [Mark's JAMStack Prayer Site](https://m2prayer.netlify.app/)
 - Removed the [Mark's JAMStack Prayer Site](https://m2prayer.netlify.app/) from the [Netlify](https://www.netlify.com/) as password protecting the site was a paid service. I have also removed it from Azure Static Web App.
+- Now using Cloudflare Pages to host the site.
 
 
 
