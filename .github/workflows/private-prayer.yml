@@ -6,7 +6,7 @@ on:
   pull_request:
   schedule:
     # - cron: '0 9 * * *'
-    - cron: '27 14 * * *'  # 14:27 UTC == 10:27 AM EDT
+    - cron: '00 15 * * *'  # 15:00 UTC == 11:00 AM EDT
 
 jobs:
   cloudflare_production_deploy:
