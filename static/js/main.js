@@ -1,6 +1,6 @@
 
 function showSelectedPrayer(request) {
-    if (request != 'Select Prayer Category') {//then get the prayer category
+    if (request !== 'Select Prayer Category') {//then get the prayer category
         $('#selectedPrayer').text(request);
     } else {//the "Select Prayer Category" option was selected
         $('#selectedPrayer').text("Select a Prayer Category");
