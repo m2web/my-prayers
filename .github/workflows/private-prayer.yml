@@ -5,8 +5,8 @@ on:
     types: [start-workflow]
   pull_request:
   schedule:
-    # - cron: '0 9 * * *'
-    - cron: '00 15 * * *'  # 15:00 UTC == 11:00 AM EDT
+    # 8:00 AM UTC - 4 hours = 4:00 AM Eastern Daylight Time (EDT)
+    - cron: '0 8 * * *'
 
 jobs:
   cloudflare_production_deploy:
