@@ -28,3 +28,7 @@ theme = "hugo-theme-jane"
 [markup.goldmark]
   [markup.goldmark.renderer]
     unsafe = true
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^CI$', '^ESV_API_KEY$']
