@@ -53,6 +53,8 @@ jobs:
           extended: true
 
       - name: Build
+        env:
+          ESV_API_KEY: ${{ secrets.ESV_API_KEY }}
         run: hugo --minify
 
       - name: Deploy to GitHub Pages

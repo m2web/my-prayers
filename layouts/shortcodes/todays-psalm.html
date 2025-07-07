@@ -25,7 +25,8 @@
 {{ end }}
 <!-- get the random chapter number -->
 {{ $todaysPsalm := printf "Psalm %s" (string (index (shuffle ($.Scratch.Get "psalmNumber")) 0)) }}
-{{ $headers := dict "Authorization" "Token 7af9f7d67d6bdb93a2b76c23bccecec4ffc43176" }}
+{{ $apiKey := getenv "ESV_API_KEY" }}
+{{ $headers := dict "Authorization" (printf "Token %s" $apiKey) }}
 {{ $verse := replace $todaysPsalm " " "+" }} <!-- replace a space with a plus -->
 
 {{ $passageJSON := getJSON "https://api.esv.org/v3/passage/text/?include-short-copyright=false&include-headings=false&include-footnotes=false&include-passage-references=false&q=" $verse $headers }}
