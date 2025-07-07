@@ -5,17 +5,39 @@ on:
     types: [start-workflow]
   pull_request:
   schedule:
-    # Run every day at 4:00 AM. Use https://crontab.guru/ to set the correct time.
-    - cron: '0 9 * * *'  
+    - cron: '0 9 * * *'
 
 jobs:
-  deploy:
+  cloudflare_production_deploy:
+    if: github.event_name == 'repository_dispatch' && github.event.action == 'start-workflow'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Fetch and checkout master
+        run: |
+          git fetch origin master
+          git checkout master
+
+      - name: Create empty commit to trigger Cloudflare deploy
+        run: |
+          git commit --allow-empty -m "Trigger Cloudflare Pages production deploy"
+          git push origin master
+
+  build_and_deploy:
+    if: github.event_name != 'repository_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          submodules: true  # Fetch Hugo themes (true OR recursive)
-          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          submodules: true
+          fetch-depth: 0
 
       - name: Checkout branch from dispatch payload
         if: github.event.client_payload.branch != ''
@@ -32,7 +54,7 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
