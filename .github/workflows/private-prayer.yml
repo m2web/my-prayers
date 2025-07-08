@@ -10,7 +10,7 @@ on:
 
 jobs:
   cloudflare_production_deploy:
-    if: github.event_name == 'repository_dispatch' && github.event.action == 'start-workflow'
+    if: github.event_name == 'repository_dispatch' # && github.event.action == 'start-workflow'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
