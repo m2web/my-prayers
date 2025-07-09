@@ -9,30 +9,7 @@ on:
     - cron: '0 8 * * *'
 
 jobs:
-  cloudflare_production_deploy:
-    if: github.event_name == 'repository_dispatch' || github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Configure Git
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-
-      - name: Fetch and checkout master
-        run: |
-          git fetch origin master
-          git checkout master
-
-      - name: Create empty commit to trigger Cloudflare deploy
-        run: |
-          git commit --allow-empty -m "Trigger Cloudflare Pages production deploy"
-          git push origin master
-
   build_and_deploy:
-    if: github.event_name != 'repository_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
