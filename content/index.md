@@ -4,6 +4,7 @@ date: 2022-01-28T07:00:37-05:00
 draft: false
 ---
 {{< the-date >}}  
+hi
 
 {{< todays-verse >}}
 
