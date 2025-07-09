@@ -17,12 +17,6 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Checkout branch from dispatch payload
-        if: github.event.client_payload.branch != ''
-        run: |
-          git fetch origin ${{ github.event.client_payload.branch }}
-          git checkout ${{ github.event.client_payload.branch }}
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
