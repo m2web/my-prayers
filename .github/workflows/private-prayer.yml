@@ -6,7 +6,8 @@ on:
   pull_request:
   schedule:
     # 8:00 AM UTC - 4 hours = 4:00 AM Eastern Daylight Time (EDT)
-    - cron: '0 8 * * *'
+    # - cron: '0 8 * * *'
+    - cron: '0 16 * * *' # Test at 11:00 AM EST
 
 jobs:
   build_and_deploy:
