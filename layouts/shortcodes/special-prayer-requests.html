@@ -1,6 +1,6 @@
 {{ $specialPrayer := getJSON "data/specialprayer.json" }}
 <div class="special-prayer-requests">
-  <h3 class="special-prayer-title">Special Prayer Requests-SEA</h3>
+  <h3 class="special-prayer-title">Special Prayer Requests</h3>
   <ul class="special-prayer-list">
     {{ range $specialPrayer }}
       <li class="special-prayer-item">{{ .prayer }}</li>
