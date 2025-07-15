@@ -22,3 +22,5 @@ node_modules/
 package-lock.json
 package.json
 
+# ignore assets/*.eml files
+assets/*.eml
