@@ -1,5 +1,3 @@
-
-
 # Import required modules
 import sys  # For command-line arguments
 import os   # For file path operations
@@ -70,8 +68,9 @@ if __name__ == "__main__":
     prayers = extract_prayer_prompts(body)
 
     # Write the extracted prayers to specialprayer.json in JSON format
-    with open('specialprayer.json', 'w', encoding='utf-8') as f:
+    output_path = os.path.join('data', 'specialprayer.json')
+    with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(prayers, f, ensure_ascii=False, indent=2)
 
     # Print a summary for the user
-    print(f"Extracted {len(prayers)} prayers from {os.path.basename(eml_path)} to specialprayer.json")
+    print(f"Extracted {len(prayers)} prayers from {os.path.basename(eml_path)} to {output_path}")
