@@ -15,7 +15,7 @@ draft: false
 
 <!-- {{< mission-link >}} -->
 
-{{< special-prayer-requests >}}
+<!-- {{< special-prayer-requests >}} -->
 
 {{< todays-country >}}
 
