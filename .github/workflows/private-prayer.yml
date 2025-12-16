@@ -38,5 +38,6 @@ jobs:
           git config user.email "actions@github.com"
           git fetch origin master
           git checkout master
+          git pull
           git commit --allow-empty -m "Trigger Cloudflare Pages production deploy"
           git push origin master
