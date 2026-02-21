@@ -27,3 +27,10 @@ assets/*.eml
 
 # ignore markdownlint.json file
 .markdownlint.json
+
+# ignore .env file (contains API keys)
+.env
+
+# Python bytecode
+__pycache__/
+*.pyc
