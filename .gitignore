@@ -25,9 +25,6 @@ package.json
 # ignore assets/*.eml files
 assets/*.eml
 
-# ignore markdownlint.json file
-.markdownlint.json
-
 # ignore .env file (contains API keys)
 .env
 
