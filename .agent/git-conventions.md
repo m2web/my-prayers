@@ -75,6 +75,6 @@ Always include the emoji in the beginning of the commit message.
 
 ## AI-Assisted Changes
 
-When AI makes changes to the site, the commit message must begin with the an appropriate GitHub emoji.
+The commit message MUST begin with an appropriate GitHub emoji.
 
 Do not push changes to the remote repository until I see the changes and approve the push.
