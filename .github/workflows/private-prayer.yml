@@ -36,8 +36,8 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git fetch origin master
-          git checkout master
+          git fetch origin main
+          git checkout main
           git pull
-          git commit --allow-empty -m "Trigger Cloudflare Pages production deploy"
-          git push origin master
+          git commit --allow-empty -m "⚡ Trigger Cloudflare Pages production deploy"
+          git push origin main
