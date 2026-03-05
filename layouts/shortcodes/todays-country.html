@@ -26,7 +26,6 @@
 {{ $todaysCountry := index $allCountriesJSON (int (sub ($.Scratch.Get "countryID") 1))}}
 <!-- get country link-->
 
-<br>
 <div class="bg-TodaysCountry">
     <h3>Today's Country</h3>
     <a href="{{ $todaysCountry.htmlLink }}" target="_blank"><strong>{{ $todaysCountry.name }}</strong></a>
